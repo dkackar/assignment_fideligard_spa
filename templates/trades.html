@@ -1,0 +1,68 @@
+
+<div class="row">
+  <div class="col-md-3 col-lg-3"></div>
+  <div class="col-md-6 col-lg-6">
+    <div class="panel panel-info text-center">
+      <div class="panel-heading">TRADE</div>
+    </div>
+  </div>   
+</div>
+
+<div class="row">
+
+  <div class="col-md-6 col-lg-6">
+    <form name="tradeForm">
+      <fieldset class="form-group">
+        
+        <label> Symbol: </label>
+        <input class="form-control" type="text" value={{transactionStock}}
+               ng-model="transactionStock" name="stock" ng-required="true"
+               ng-change="checkStockOwned()">
+        
+        <label for="buysell">Buy/Sell:</label>
+        <select class="form-control" id="buysell" ng-model="transactionType">
+          <option>Buy</option>
+          <option>Sell</option>
+        </select>
+
+        <label> Quantity: </label>
+        <input class="form-control" type="text" value={{transactionQty}}
+               ng-model="transactionQty" name="qty" 
+               ng-min="1" ng-max="5000" ng-pattern="regex" 
+               ng-required="true"
+               ng-change="updateCost(transactionQty)">
+        
+        <label> Price </label>
+        <input class="form-control"type="text" value={{transactionPrice}}
+                ng-model="transactionPrice" name="price" disabled>
+        
+        <label> Cost </label>
+        <input class="form-control" type="text" value={{transactionCost}}
+               ng-model="transactionCost" name="cost" disabled
+               ng-show="transactionCost">
+      </fieldset>  
+    </form>  
+  </div>  
+  <div class="col-md-6 col-lg-6">
+    <h4>Cash Available</h4>
+    <button type="button" class="btn btn-primary btn-lg">
+      <span class="badge">{{cashBalance | currency}}</span></button>
+    <br>
+    <br>
+    <h4>Order Status</h4>
+    <p class="alert alert-danger"><span ng-if="!orderStatus || !tradeForm.$valid" 
+             ng-model="orderStatus" class="animate-if">
+        ORDER IS INVALID <{{errMsg}}>
+        <span>
+    </p> 
+ </div>
+
+
+<div class="row">
+  <div class="col-md-12 col-lg-12">
+     <button type="submit" class="btn btn-lg btn-success" 
+             ng-click="addTransaction(tradeForm.$valid)">
+      Place Order!
+    </button>
+  </div>   
+</div>

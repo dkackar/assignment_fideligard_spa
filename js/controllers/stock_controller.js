@@ -1,5 +1,6 @@
 stockApp.controller("StockCtrl",
-  ['$scope', 'dateService', 'stockService', function($scope, dateService, stockService){
+  ['$scope', '$rootScope', 'dateService', 'stockService', 'transactionService',
+   function($scope, $rootScope, dateService, stockService, transactionService){
 
     //console.log( $stateParams );
 
@@ -10,12 +11,13 @@ stockApp.controller("StockCtrl",
     
     $scope.getByDate = function() {        
       $scope.currentDate = Number(dateService.getCurrentDate());  
-      console.log("In main get by");
       stockService.getByDate($scope.currentDate);
       $scope.stocksTable = stockService.getStocksByDate();
-      //console.log($scope.stocksByDate);
     };
-    
+  
+    $scope.trade = function(tradeSymbol,tradeData) {
+      transactionService.tmpTransaction(tradeSymbol,tradeData);
+    }  
   }]
   
 );

@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-3 col-lg-3"></div>
+  <div class="col-md-6 col-lg-6">
+    <div class="panel panel-info text-center">
+      <div class="panel-heading">TRANSACTOINS</div>
+    </div>
+  </div>   
+</div>
+
+<div class="row">
+
+<div class="col-md-12 col-lg-12">
+  <form>
+    <div class="form-group">
+      <label>Filter:</label>
+      <input type="text" ng-model="transactionFilter" placeholder="Month DD YYYY or String" 
+             name="filterValue">
+    </div>
+  </form>
+
+  <table class="table table-striped">
+    <thead>
+      <th>
+        <a href="#" ng-click="sortType = 'transactionDate'; sortAsc = !sortAsc">Date
+          <span ng-show="sortType == 'transactionDate' && sortAsc" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'transactionDate' && !sortAsc" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+      <th>
+        <a href="#" ng-click="sortType = 'transactionStock'; sortAsc = !sortAsc">Symbol
+          <span ng-show="sortType == 'transactionStock' && sortAsc" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'transactionStock' && !sortAsc" class="fa fa-caret-up"></span>
+        </a>
+
+      </th>
+      <th>
+        <a href="#" ng-click="sortType = 'transactionType'; sortAsc = !sortAsc">Type
+          <span ng-show="sortType == 'transactionType' && sortAsc" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'transactionType' && !sortAsc" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+      <th>
+        <a href="#" ng-click="sortType = 'transactionQty'; sortAsc = !sortAsc">Quantity
+          <span ng-show="sortType == 'transactionQty' && sortAsc" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'transactionQty' && !sortAsc" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+      <th>
+          <a href="#" ng-click="sortType = 'transactionPrice'; sortAsc = !sortAsc">Price
+          <span ng-show="sortType == 'transactionPrice' && sortAsc" class="fa fa-caret-down"></span>
+          <span ng-show="sortType == 'transactionPrice' && !sortAsc" class="fa fa-caret-up"></span>
+        </a>
+      </th>
+    </thead>
+    <tbody>
+      <tr ng-repeat='item in transactions | orderBy:sortType:sortAsc | filter:transactionFilter ' 
+          ng-model="transactions">
+        <td>{{ item.transactionDate| date }}</td>
+        <td>{{ item.transactionStock }}</td>
+        <td>{{ item.transactionType }}</td>
+        <td>{{ item.transactionQty }}</td>
+        <td>{{ item.transactionPrice | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>

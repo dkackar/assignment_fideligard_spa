@@ -2,11 +2,11 @@ stockApp.factory('stockService', ['$http', function($http) {
   
   var obj = {}
   var stocks = {};
-  var stockOwned = ["AAPL", "GOOG", "YHOO", "CSCO", "AMZN", "FB", "FFIV", "TSLA", "WDAY"];
+  var symbols = ["AAPL", "GOOG", "YHOO", "CSCO", "AMZN", "FB", "FFIV", "TSLA", "WDAY"];
   var stocksByDate = {};
 
   obj.getStocksOwned = function() {
-    return stockOwned;
+    return symbols;
   };
 
   obj.getStocksByDate = function() {
@@ -18,21 +18,10 @@ stockApp.factory('stockService', ['$http', function($http) {
   };
 
   obj.getByDate = function(currentDate) {
-    console.log("In getbydate");
-
-    console.log("Current Date In SS: " + currentDate);    
 
     var oneDayAgo = obj.daysAgo(1,currentDate);
     var sevenDaysAgo = obj.daysAgo(7,currentDate);
     var thirtyDaysAgo = obj.daysAgo(30,currentDate);
-
-    console.log('One day ago: ' + oneDayAgo);
-
-    console.log('One day ago: ' + oneDayAgo.getTime());
-    console.log('Seven days ago: ' + sevenDaysAgo.getTime());
-    console.log('Thirty days ago: ' + thirtyDaysAgo.getTime());
-
-    console.log('got to getByDate');
 
     var d = new Date(currentDate);
 
@@ -70,15 +59,15 @@ stockApp.factory('stockService', ['$http', function($http) {
 
       stocksByDate[stock] = newStockData;
     })
-    //return stocksByDate;
+
   };
 
   obj.getQuery = function() {
     
     prefix = 'http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.historicaldata where symbol = "'
     suffix='" and startDate = "2014-01-01" and endDate = "2014-12-31" &format=json &diagnostics=true &env=store://datatables.org/alltableswithkeys&callback='
-    for (var i = 0; i < stockOwned.length; i++) {
-      queryTxt = prefix+stockOwned[i]+suffix;
+    for (var i = 0; i < symbols.length; i++) {
+      queryTxt = prefix+symbols[i]+suffix;
       $http.
         get( queryTxt ).
         then( function( response ){
@@ -91,7 +80,7 @@ stockApp.factory('stockService', ['$http', function($http) {
         }
       );
     };
-    //getByDate();
+
     return stocks;
   };
 

@@ -1,4 +1,4 @@
-<h1>Stock Panel</h1>
+
 <table class="table table-striped">
   <thead>
     <th>Symbol</th>
@@ -15,7 +15,11 @@
       <td>{{ data['1'] - data['0'] | currency }}</td>
       <td>{{ data['7'] - data['0'] | currency }}</td>
       <td>{{ data['30']- data['0'] | currency }}</td>
-      <td>trade</td>
+      <td>
+        <a ui-sref="index.trades({data:data,symbol:symbol})">
+           <button class="btn btn-info btn-sm">Trade!</button>
+        </a> 
+      </td>
     </tr>
   </tbody>
 </table>

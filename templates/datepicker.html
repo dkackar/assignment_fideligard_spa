@@ -1,4 +1,7 @@
-<input type="range" min="{{ minDate }}" max="{{ maxDate }}" value="{{ minDate }}" step="{{ dayLength }}" name="datepicker" ng-model='currentDate' ng-mousedown='getByDate()'>
-<p>Current date: {{ currentDate | date : 'yyyy-MM-dd' : 'UTC' }}</p>
-<p>Min date: {{ minDate | date : 'yyyy-MM-dd' : 'UTC' }} --- 
-   Max date: {{ maxDate | date : 'yyyy-MM-dd' : 'UTC' }}</p>
+<input type="range" min="{{ minDate }}" max="{{ maxDate }}"
+       value="{{ minDate }}" step="{{ dayLength }}" 
+       name="datepicker" ng-model='currentDate' ng-mousedown='getByDate()'
+       ng-mouseup='getByDate()'>
+<p>Current date: {{ currentDate | date : 'yyyy-MM-dd' : 'UTC' }} ---
+   (Between: {{ minDate | date : 'yyyy-MM-dd' : 'UTC' }} to {{ maxDate | date : 'yyyy-MM-dd' : 'UTC' }})
+</p>

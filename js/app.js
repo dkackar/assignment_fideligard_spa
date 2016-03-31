@@ -1,9 +1,9 @@
-var stockApp = angular.module("stockApp", ['ui.router', 'ui.bootstrap'] );
+var stockApp = angular.module("stockApp", ['ui.router', 'ui.bootstrap'] )
 
 stockApp.config(function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
-
+  
   $stateProvider
 
     .state('index', {
@@ -13,18 +13,11 @@ stockApp.config(function($stateProvider, $urlRouterProvider) {
           templateUrl: 'templates/navbar.html'
         },
 
-        'stockpanel': {
-          // resolve: {
-          //   someProperty:  function( $http ){
-          //     return $http( { method: 'GET', url: '/someUrl' } )
-          //     .then (function (data) {
-          //       return doSomeStuffFirst( data );
-          //     });
-          //  }, 
-          // },
-          
+        'stockpanel': {          
           templateUrl: 'templates/stock_panel.html',
-          controller: 'StockCtrl'
+          controller: 'StockCtrl',
+          //params: { data: null, 
+          //          symbol: null}
         },
 
         'datepicker': {
@@ -33,27 +26,29 @@ stockApp.config(function($stateProvider, $urlRouterProvider) {
         },
 
         'main': {
-          templateUrl: 'templates/main.html'
+          templateUrl: 'templates/main.html',
         },
       },
     })
 
-    .state('main.trades', {
-      url: '/trades',
+    .state('index.trades', {
+      url: 'trades',
       templateUrl: "templates/trades.html",
-      controller: 'tradesCtrl'
+      controller: 'tradesCtrl',
+      params: { data: null, 
+                symbol: null}
     })
 
-    .state('main.transaction', {
-      url: '/transaction',
-      templateUrl: "templates/transaction.html",
+    .state('index.transactions', {
+      url: 'transaction',
+      templateUrl: "templates/transactions.html",
       controller: 'transactionCtrl'
     })
 
-    .state('main.portfolio', {
-      url: '/portfolio',
+    .state('index.portfolio', {
+      url: 'portfolio',
       templateUrl: "templates/portfolio.html",
-      controller: 'portfolioCtrl'
+      controller: 'tradesCtrl'
     })
 
 });
